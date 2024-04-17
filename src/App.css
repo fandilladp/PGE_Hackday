@@ -1,0 +1,155 @@
+.App {
+  text-align: center;
+  background-color: #5CBDE7;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 20px;
+}
+
+.wrapper {
+  background-color: #FEFEFE;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.wrapper h3 {
+  margin: 0;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.table-keterangan {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #C1D2DE;
+}
+
+.table-keterangan th {
+  background-color: #0076C0;
+  color: white;
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+.table-keterangan td {
+  font-size: 12px;
+  border-bottom: 1px solid #C1D2DE;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.table-data {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #C1D2DE;
+  table-layout: 'fixed';
+}
+
+.table-data th {
+  background-color: #0076C0;
+  color: white;
+  font-size: 12px;
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.table-data td {
+  font-size: 10px;
+  border-bottom: 1px solid #C1D2DE;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.container-child-keterangan {
+  border: 1px solid #C1D2DE;
+  text-align: start;
+  padding: 10px;
+}
+
+.child-keterangan {
+  font-size: 11px;
+}
+
+.button-area {
+  background-color: #0076C0;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+}
+
+.container-right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  margin-left: 20px;
+  padding: 20px;
+
+  background-color: white;
+  border-radius: 20px;
+}
+
+.container-button-area {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.container-info-lokasi {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-lokasi-item {
+  border: 1px solid #C1D2DE;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  font-weight: bold;
+  justify-content: center;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+.action-date {
+  width: 100%;
+
+  display: flex;
+  justify-content: end;
+
+  font-size: 12px;
+
+  color: #0076C0;
+}
+
+.action-date button{
+  color: #0076C0;
+  font-size: 12px;
+  border: none;
+  background-color: transparent;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+.alert-cuaca {
+  background-color: #0076C0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  color: white;
+  letter-spacing: 3px;
+  font-size: 13px;
+}
