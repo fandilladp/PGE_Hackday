@@ -67,31 +67,31 @@ const MainLayout = ({ children }) => {
                   </tr>
                   <tr>
                     <td>TL</td>
-                    <td>Utara</td>
+                    <td>Timur Laut</td>
                   </tr>
                   <tr>
                     <td>T</td>
-                    <td>Utara</td>
+                    <td>Timur</td>
                   </tr>
                   <tr>
                     <td>TG</td>
-                    <td>Utara</td>
+                    <td>Tenggara</td>
                   </tr>
                   <tr>
                     <td>S</td>
-                    <td>Utara</td>
+                    <td>Selatan</td>
                   </tr>
                   <tr>
                     <td>BD</td>
-                    <td>Utara</td>
+                    <td>Barat Daya</td>
                   </tr>
                   <tr>
                     <td>B</td>
-                    <td>Utara</td>
+                    <td>Barat</td>
                   </tr>
                   <tr>
                     <td>BL</td>
-                    <td>Utara</td>
+                    <td>Barat Laut</td>
                   </tr>
                 </tbody>
               </table>

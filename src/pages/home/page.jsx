@@ -4,15 +4,13 @@ import { MainLayout } from "../../layouts";
 import Tabel from "./components/Tabel";
 import { useForm } from "react-hook-form";
 import moment from "moment";
-import { CiLocationArrow1 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { formatDate, getDailyAlert } from "../../utils/helper";
 import TabelSkeleton from "./components/TabelSkeleton";
-import AlertIcon from "../../assets/warning-icon.png";
-import { CiCalendarDate } from "react-icons/ci";
-import { TiWeatherDownpour } from "react-icons/ti";
 import { FaSearchLocation } from "react-icons/fa";
 import { ModalWithCloseButton } from "../../components";
+import Header from "./components/Header";
+import DailyAlert from "./components/DailyAlert";
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(moment().format("YYYY-MM-DD"));
@@ -40,11 +38,7 @@ const HomePage = () => {
     <MainLayout>
       <div className="flex flex-col gap-5 w-full h-full">
         {/* Header */}
-        <div className="flex gap-3 bg-white border-2 border-black uppercase py-10 px-5 rounded-lg items-center justify-center">
-          <p className="font-bold text-xl text-center">
-            INFORMASI PRAKIRAAN CUACA KHUSUS PT Pertamina Geothermal Energy Tbk
-          </p>
-        </div>
+        <Header />
 
         {/* Pagination */}
         <div className="flex justify-between gap-5 flex-col md:flex-row ">
@@ -91,56 +85,31 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* <div className="bg-white py-2 rounded-lg flex items-center justify-center"></div> */}
-        <div className="bg-white rounded-lg px-4 py-5 w-full flex flex-col text-sm sm:text-base">
-          <div className="w-full">
-            <div className="flex flex-col gap-2">
-              <div className="font-semibold text-black flex gap-1 items-center ">
-                Peringatan Cuaca Dini :
-                {daily_alert ? (
-                  <img
-                    src={AlertIcon}
-                    alt="caution"
-                    className="w-6 h-6 animate-pulse"
-                  />
-                ) : (
-                  <span className="font-normal">Tidak ada</span>
-                )}
-              </div>
-              {daily_alert && (
-                <>
-                  <div className="flex gap-2 w-full">
-                    <CiCalendarDate className="text-2xl" />
-                    <small className="text-red-600 font-bold">
-                      {formatDate(currentDate)}
-                    </small>
-                  </div>
-                  <div className="flex gap-2 w-full">
-                    <TiWeatherDownpour className="text-2xl" />
-                    <small className="text-red-600 font-bold">
-                      {getDailyAlert(data)}
-                    </small>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
+        {/* Daily alert */}
+        <div className="bg-white rounded-lg px-4 py-5 w-full flex flex-col text-sm  sm:text-base">
+          <DailyAlert
+            data={data}
+            daily_alert={daily_alert}
+            currentDate={currentDate}
+          />
         </div>
 
         {/* Table */}
         {isFetching ? <TabelSkeleton /> : <Tabel data={data} />}
 
         {/* PUBLISHED DATA */}
-        <div className="w-full bg-white p-4 rounded-lg text-sm sm:text-base">
+        <div className="w-full bg-white p-4 rounded-lg text-sm  sm:text-base">
           <table className="w-full py-2 px-4 rounded-lg max-w-lg">
-            <tr>
-              <td className="font-semibold text-black ">Tanggal Publikasi</td>
-              <td>: {formatDate(currentDate)}</td>
-            </tr>
-            <tr>
-              <td className="font-semibold text-black">Sumber Data</td>
-              <td>: Badan Meteorologi, Klimatologi & Geofisika</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className="font-semibold text-black ">Tanggal Publikasi</td>
+                <td>: {formatDate(currentDate)}</td>
+              </tr>
+              <tr>
+                <td className="font-semibold text-black">Sumber Data</td>
+                <td>: Badan Meteorologi, Klimatologi & Geofisika</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
