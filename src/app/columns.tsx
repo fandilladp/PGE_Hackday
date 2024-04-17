@@ -81,8 +81,4 @@ export type ForecastData = {
       accessorKey: "weather_code",
       header: "Weather Code",
     },
-    {
-      accessorKey: "alert_all",
-      header: "Alert",
-    },
   ];
