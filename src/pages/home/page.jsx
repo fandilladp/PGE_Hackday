@@ -11,18 +11,18 @@ import { FaSearchLocation } from "react-icons/fa";
 import { ModalWithCloseButton } from "../../components";
 import Header from "./components/Header";
 import DailyAlert from "./components/DailyAlert";
+import { TbMoodEmptyFilled } from "react-icons/tb";
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(moment().format("YYYY-MM-DD"));
   const [lokasi, setLokasi] = useState([]);
   const { register, watch, setValue } = useForm();
   const { data, isFetching } = useGetCuaca({
-    tgl: currentDate,
+    tgl: currentDate || "",
     location_name: watch("location_name"),
   });
   const { data: dataLokasi } = useGetAllLokasi();
   const daily_alert = getDailyAlert(data);
-
   const handleNext = () => {
     if (moment().format("YYYY-MM-DD") === currentDate) {
       return;
@@ -100,7 +100,16 @@ const HomePage = () => {
         </div>
 
         {/* Table */}
-        {isFetching ? <TabelSkeleton /> : <Tabel data={data} />}
+        {isFetching ? (
+          <TabelSkeleton />
+        ) : data ? (
+          <Tabel data={data} />
+        ) : (
+          <div className="bg-white py-10 rounded-lg flex flex-col items-center justify-center gap-5">
+            <TbMoodEmptyFilled size={100} />
+            <span className="font-bold">Tida ada data yang ditemukan</span>
+          </div>
+        )}
 
         {/* PUBLISHED DATA */}
         <div className="w-full bg-white p-4 rounded-lg text-sm  sm:text-base">
