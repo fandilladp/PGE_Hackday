@@ -8,15 +8,17 @@ const Tabel = ({ data }) => {
           {/* head */}
           <thead>
             <tr>
-              <th>Tanggal</th>
-              <th>Cuaca</th>
-              <th>Suhu (°C)</th>
-              <th>Rh</th>
-              <th>Arah Angin</th>
-              <th>Kecepatan Angin (Km/Jam)</th>
-              <th>Visibility</th>
-              <th>Intensitas Curah Hujan (mm)</th>
-              <th>Durasi Hujan (Jam)</th>
+              <th className="font-bold text-black">Tanggal</th>
+              <th className="font-bold text-black">Cuaca</th>
+              <th className="font-bold text-black">Suhu (°C)</th>
+              <th className="font-bold text-black">Rh</th>
+              <th className="font-bold text-black">Arah Angin</th>
+              <th className="font-bold text-black">Kecepatan Angin (Km/Jam)</th>
+              <th className="font-bold text-black">Visibility</th>
+              <th className="font-bold text-black">
+                Intensitas Curah Hujan (mm)
+              </th>
+              <th className="font-bold text-black">Durasi Hujan (Jam)</th>
             </tr>
           </thead>
           <tbody>
