@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useGetCuaca } from "../../library";
+import React, { useEffect, useState } from "react";
+import { useGetAllLokasi, useGetCuaca } from "../../library";
 import { MainLayout } from "../../layouts";
 import Tabel from "./components/Tabel";
 import { useForm } from "react-hook-form";
@@ -14,11 +14,13 @@ import DailyAlert from "./components/DailyAlert";
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(moment().format("YYYY-MM-DD"));
-  const { register, watch } = useForm();
+  const [lokasi, setLokasi] = useState([]);
+  const { register, watch, setValue } = useForm();
   const { data, isFetching } = useGetCuaca({
     tgl: currentDate,
     location_name: watch("location_name"),
   });
+  const { data: dataLokasi } = useGetAllLokasi();
   const daily_alert = getDailyAlert(data);
 
   const handleNext = () => {
@@ -34,6 +36,11 @@ const HomePage = () => {
       .format("YYYY-MM-DD");
     setCurrentDate(newDate);
   };
+
+  useEffect(() => {
+    setLokasi(dataLokasi?.map((item) => item.location_name));
+    setValue("location_name", dataLokasi?.[0]?.location_name);
+  }, [dataLokasi]);
   return (
     <MainLayout>
       <div className="flex flex-col gap-5 w-full h-full">
@@ -48,13 +55,11 @@ const HomePage = () => {
                 className="select select-bordered w-full md:max-w-xs"
                 {...register("location_name")}
               >
-                <option value={"Area_Kamojang"}>Area Kamojang</option>
-                <option value={"Area_Karaha_Bodas"}>Area Karaha Bodas</option>
-                <option value={"Area_Lahendong"}>Area Lahendong</option>
-                <option value={"Area_Lumut_Balai"}>Area Lumut Balai</option>
-                <option value={"Area_Sibayak"}>Area Sibayak</option>
-                <option value={"Area_Ulubelu"}>Area Ulubelu</option>
-                <option value={"Proyek_Hululais"}>Proyek Hululais</option>
+                {lokasi?.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item?.replace(/_/g, " ")}
+                  </option>
+                ))}
               </select>
               <Link
                 className="btn"

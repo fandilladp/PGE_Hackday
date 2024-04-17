@@ -12,7 +12,7 @@ const useGetCuaca = (body) => {
     },
     queryKey: ["cuaca", body],
     select: (data) => {
-      const filteredData = data.data.filter(
+      const filteredData = data?.data?.filter(
         (item) => item.location_name === body.location_name
       );
       return filteredData[0];
