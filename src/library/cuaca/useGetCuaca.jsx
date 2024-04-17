@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 const getDataCuaca = (body) => {
-  return axios.get(`https://hsse.mypge.id/cuaca/api?tgl=${body.tgl}`);
+  return axios.get(`/pgehack?tgl=${body.tgl}`);
 };
 
 const useGetCuaca = (body) => {
