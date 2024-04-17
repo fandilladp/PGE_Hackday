@@ -1,8 +1,12 @@
 
 # PGE Weather Forecast Visualization Hackathon
 
-##
+## Running website online
 LINK ACCESS https://pge-weather.vercel.app
+
+## Running website lokal
+1. "npm install" untuk menyimpan module nya
+2. "npm run dev" untuk menjalankan aplikasinya
 
 ## Overview
 
