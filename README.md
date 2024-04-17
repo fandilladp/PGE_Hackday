@@ -1,19 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PGE Weather Forecast Visualization Hackathon
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This hackathon focuses on creating visualizations for the PGE weather forecast data using a provided API. Participants will have 3 hours to develop their visualizations and submit their work for judging.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Resources
+
+### API Information
+
+The weather forecast data is retrieved from the following API endpoint:
+
+```
+https://publik.bmkg.go.id/pge/forecast24h
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Request Example
 
-Dorino Baharson
+```typescript
+const axios = require('axios');
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'https://hsse.mypge.id/cuaca/api',
+};
+
+axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+## Hackathon Rules
+![Gambar Cuaca](/assets/image.png)
+- Participants are free to use the programming language they are proficient in..
+- Create visualizations based on the weather forecast data.
+- Submit your final code new branch | yourname_dev.
+
+
+## Judging Criteria
+
+- Creativity and innovation in visualization.
+- Functionality and accuracy of the visualization.
+- Code quality and Faster.
+- Responsiveness and user experience.
+
+Happy hacking!
