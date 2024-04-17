@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PGE_hack</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Styles -->
+    <style>
+      body {
+        background-color: #5bbde7;
+      }
+
+      header {
+        background-color: #fff;
+        padding: 20px;
+      }
+
+      main {
+        background-color: #fff;
+        padding: 20px;
+      }
+
+      footer {
+        background-color: #f0f0f0;
+        padding: 10px;
+      }
+
+      .custom-dropdown {
+        background-color: #f8f9fa;
+        color: #598dc0;
+        border-color: #0080ff;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .pagination button {
+        cursor: pointer;
+      }
+
+      .current-day {
+        font-weight: bold;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        color: #333333;
+      }
+
+      /* Main Section Styles */
+      main {
+        background-color: #f8f8f8;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: #ffffff;
+        padding: 10px;
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      /* Dropdown Styles */
+      .custom-dropdown {
+        background-color: #f8f9fa;
+        color: #333333;
+        border-color: #cccccc;
+        padding: 8px;
+        margin-bottom: 20px;
+      }
+
+      /* Pagination Styles */
+      .pagination button {
+        cursor: pointer;
+        padding: 8px 16px;
+        margin-right: 10px;
+        border-radius: 4px;
+      }
+
+      #prevDayButton {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+
+      #nextDayButton {
+        background-color: #28a745;
+        color: #ffffff;
+      }
+
+      /* Table Styles */
+      .table {
+        border-radius: 8px;
+      }
+
+      .table th,
+      .table td {
+        background-color: #ffffff;
+        color: #333333;
+      }
+
+      /* Alert Message Styles */
+      .alert-message {
+        background-color: #ffc107;
+        color: #333333;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 4px;
+      }
+
+      /* CSS for styling */
+      .card-info {
+        border: 2px solid #0076c1; /* Add border to the card */
+      }
+
+      .table thead th {
+        background-color: #0076c1; /* Set header background color */
+        color: #fff; /* Set header text color */
+      }
+
+      .table tr th {
+        background-color: #0076c1; /* Set header background color */
+        color: #fff; /* Set header text color */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="mt-2 ml-5 mb-4">
+        <div class="row">
+          <div class="col-3">
+            <div class="card card-info p-3">
+              <div class="text-center">
+                <img
+                  src="./images/Logo-BMKG.webp"
+                  alt="BMKG"
+                  class="img-fluid"
+                  width="50"
+                  height="120"
+                />
+                <img
+                  src="./images/logo_pgeWHite.png"
+                  alt="Pertamina"
+                  class="img-fluid"
+                  width="150"
+                  height="150"
+                />
+              </div>
+            </div>
+            <div class="card mt-3 p-2">
+              <h2 class="text-center mb-0">INFORMASI PRAKIRAAN CUACA KHUSUS</h2>
+              <hr />
+              <h3 class="text-center">PT Pertamina Geothermal Energy Tbk</h3>
+            </div>
+            <div class="card mt-3 p-3">
+              <h4 class="text-center mb-2">Keterangan</h4>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Kode</th>
+                    <th>Arah Angin</th>
+                  </tr>
+                  <tr>
+                    <td>U</td>
+                    <td>Utara</td>
+                  </tr>
+                  <tr>
+                    <td>TL</td>
+                    <td>Timur Laut</td>
+                  </tr>
+                  <tr>
+                    <td>T</td>
+                    <td>Timur</td>
+                  </tr>
+                  <tr>
+                    <td>TG</td>
+                    <td>tenggara</td>
+                  </tr>
+                  <tr>
+                    <td>S</td>
+                    <td>Selatan</td>
+                  </tr>
+                  <tr>
+                    <td>BD</td>
+                    <td>Barat Daya</td>
+                  </tr>
+                  <tr>
+                    <td>B</td>
+                    <td>Barat</td>
+                  </tr>
+                  <tr>
+                    <td>BL</td>
+                    <td>Barat Laut</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="p-0">
+                <ul>
+                  <li>Arah angin menunjukkan darimana angin bertiup.</li>
+                  <li>
+                    Durasi hujan harian dihitung sejak 07.00 hingga 07.00 WIB
+                    (24 jam).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="text-center mb-4">Dashboard Prakiraan cuaca</h4>
+                <hr />
+                <div class="form-group mb-3 mt-1">
+                  <label for="locationSelect"
+                    ><strong>Pilih Lokasi:</strong></label
+                  >
+                  <select
+                    class="form-control custom-select custom-dropdown"
+                    id="locationSelect"
+                  >
+                    <option value="Area_Kamojang">Area Kamojang</option>
+                    <option value="Area_Karaha_Bodas">Area Karaha Bodas</option>
+                    <option value="Area_Lahendong">Area Lahendong</option>
+                    <option value="Area_Lumut_Balai">Area Lumut Balai</option>
+                    <option value="Area_Sibayak">Area Sibayak</option>
+                    <option value="Area_Ulubelu">Area Ulubelu</option>
+                    <option value="Proyek_Hululais">Proyek Hululais</option>
+                  </select>
+                </div>
+                <hr />
+                <h5 class="text-center mb-4">Prakiraan Cuaca 7 Hari Kedepan</h5>
+                <nav aria-label="Paginasi">
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item">
+                      <button
+                        class="page-link"
+                        id="prevDayButton"
+                        onclick="prevDay()"
+                      >
+                        Prev
+                      </button>
+                    </li>
+                    <li class="page-item">
+                      <button
+                        class="page-link"
+                        id="nextDayButton"
+                        onclick="nextDay()"
+                      >
+                        Next
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Tanggal</th>
+                      <th>Cuaca</th>
+                      <th>Suhu (C)</th>
+                      <th>RH (%)</th>
+                      <th>Arah Angin</th>
+                      <th>Kecepatan Angin (Km/Jam)</th>
+                      <th>Visibility</th>
+                      <th>Intensitas Curah Hujan (mm)</th>
+                      <th>Durasi Hujan (Jam)</th>
+                    </thead>
+
+                    <tbody id="weatherTableBody"></tbody>
+                  </table>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 text-center">
+                    <h5>Informasi Hari Publikasi:</h5>
+                    <p id="firstDayInfo"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-4">
+              <div class="card card-info text-center">
+                <div class="d-flex justify-content-center align-items-center">
+                  <img
+                    src="./images/warning-icon.png"
+                    alt="Alert Icon"
+                    width="30"
+                    height="30"
+                  />
+                  <h4 class="ml-2 mb-0">PERINGATAN DINI CUACA EKSTREM</h4>
+                  <img
+                    src="./images/warning-icon.png"
+                    alt="Alert Icon"
+                    width="30"
+                    height="30"
+                  />
+                </div>
+                <div class="alert-message mt-2" id="alertMessage"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const apiUrl = "https://office.pge.world/pgehack/";
+      const weatherTableBody = document.getElementById("weatherTableBody");
+      const locationSelect = document.getElementById("locationSelect");
+      const prevDayButton = document.getElementById("prevDayButton");
+      const nextDayButton = document.getElementById("nextDayButton");
+      const today = new Date();
+      let locationDate = new Date(); // Define and initialize locationDate variable
+      nextDayButton.disabled = true;
+
+      function prevDay() {
+        const yesterday = new Date(locationDate); // Create a new date object for yesterday
+        yesterday.setDate(yesterday.getDate() - 1); // Set it to the previous day
+
+        // Fetch data for yesterday
+        getWeatherData(locationSelect.value, yesterday)
+          .then((forecastData) => {
+            // Clear existing rows
+            weatherTableBody.innerHTML = "";
+
+            // Loop through the forecast data and update the table
+            forecastData.forEach((forecast) => {
+              const row = weatherTableBody.insertRow();
+
+              // Create cells and set content
+              const dateCell = row.insertCell();
+              dateCell.textContent = forecast.time_local;
+
+              const weatherCell = row.insertCell();
+              weatherCell.textContent = forecast.weather;
+
+              const tempCell = row.insertCell();
+              tempCell.textContent = `${forecast.temp_min} - ${forecast.temp_max} C`;
+
+              const rhCell = row.insertCell();
+              rhCell.textContent = `${forecast.rh_min} - ${forecast.rh_max}%`;
+
+              const windDirCell = row.insertCell();
+              windDirCell.textContent = forecast.windir24h;
+
+              const windSpeedCell = row.insertCell();
+              windSpeedCell.textContent = `${forecast.windspd24h} Km/Jam`;
+
+              const visibilityCell = row.insertCell();
+              visibilityCell.textContent = forecast.vis24;
+
+              const rainIntensityCell = row.insertCell();
+              rainIntensityCell.textContent = `${forecast.prec24h} mm`;
+
+              const rainDurationCell = row.insertCell();
+              rainDurationCell.textContent = `${forecast.dur24h} Jam`;
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data for previous day:", error);
+            // Handle the error as needed
+          });
+
+        // Update locationDate to yesterday
+        locationDate = yesterday;
+
+        // Disable Next button if necessary
+        nextDayButton.disabled = locationDate >= today;
+      }
+
+      function nextDay() {
+        const tomorrow = new Date(locationDate); // Create a new date object for tomorrow
+        tomorrow.setDate(tomorrow.getDate() + 1); // Set it to the next day
+
+        // Fetch data for tomorrow
+        getWeatherData(locationSelect.value, tomorrow)
+          .then((forecastData) => {
+            // Clear existing rows
+            weatherTableBody.innerHTML = "";
+
+            // Loop through the forecast data and update the table
+            forecastData.forEach((forecast) => {
+              const row = weatherTableBody.insertRow();
+
+              // Create cells and set content
+              const dateCell = row.insertCell();
+              dateCell.textContent = forecast.time_local;
+
+              const weatherCell = row.insertCell();
+              weatherCell.textContent = forecast.weather;
+
+              const tempCell = row.insertCell();
+              tempCell.textContent = `${forecast.temp_min} - ${forecast.temp_max} C`;
+
+              const rhCell = row.insertCell();
+              rhCell.textContent = `${forecast.rh_min} - ${forecast.rh_max}%`;
+
+              const windDirCell = row.insertCell();
+              windDirCell.textContent = forecast.windir24h;
+
+              const windSpeedCell = row.insertCell();
+              windSpeedCell.textContent = `${forecast.windspd24h} Km/Jam`;
+
+              const visibilityCell = row.insertCell();
+              visibilityCell.textContent = forecast.vis24;
+
+              const rainIntensityCell = row.insertCell();
+              rainIntensityCell.textContent = `${forecast.prec24h} mm`;
+
+              const rainDurationCell = row.insertCell();
+              rainDurationCell.textContent = `${forecast.dur24h} Jam`;
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data for next day:", error);
+            // Handle the error as needed
+          });
+
+        // Update locationDate to tomorrow
+        locationDate = tomorrow;
+
+        // Disable Next button if necessary
+        nextDayButton.disabled = locationDate >= today;
+      }
+
+      // Function to fetch weather data
+      function getWeatherData(location, date) {
+        return axios
+          .get(apiUrl, {
+            params: {
+              tgl: date.toISOString().slice(0, 10), // Format date as YYYY-MM-DD
+            },
+          })
+          .then((response) => {
+            if (response.data && Array.isArray(response.data)) {
+              const locationData = response.data.find(
+                (item) => item.location_name === location
+              );
+              return locationData ? locationData.forecast : [];
+            } else {
+              throw new Error("Invalid data format received from the API");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            // Handle the error here, such as displaying a message to the user or retrying the request
+            // For now, returning an empty array as fallback data
+            return [];
+          });
+      }
+
+      // Function to update publication date based on the first row of the table
+      function updatePublicationDate() {
+        const firstRowDateCell = document.querySelector(
+          "#weatherTableBody tr:first-child td:first-child"
+        );
+        if (firstRowDateCell) {
+          const publicationDate = new Date(firstRowDateCell.textContent);
+          const options = { year: "numeric", month: "long", day: "numeric" };
+          const formattedDate = publicationDate.toLocaleDateString(
+            "id-ID",
+            options
+          );
+          const firstDayInfo = document.getElementById("firstDayInfo");
+          firstDayInfo.textContent = `Tanggal Publikasi: ${formattedDate}`;
+        }
+      }
+
+      // Function to update the table
+      function updateWeatherTable(location, date) {
+        weatherTableBody.innerHTML = ""; // Clear existing rows
+        const promises = [];
+        for (let i = 0; i < 7; i++) {
+          const newDate = new Date(date); // Create a new Date object for each iteration
+          newDate.setDate(newDate.getDate() + i);
+          promises.push(getWeatherData(location, newDate)); // Pass newDate to getWeatherData
+        }
+
+        Promise.all(promises)
+          .then((allForecasts) => {
+            // weatherTableBody.innerHTML = "";
+            allForecasts.forEach((forecastData) => {
+              forecastData.forEach((forecast) => {
+                // Loop through daily forecasts
+                const row = weatherTableBody.insertRow();
+
+                // Create cells and set content
+                const dateCell = row.insertCell();
+                dateCell.textContent = forecast.time_local;
+
+                const weatherCell = row.insertCell();
+                weatherCell.textContent = forecast.weather;
+
+                const tempCell = row.insertCell();
+                tempCell.textContent = `${forecast.temp_min} - ${forecast.temp_max} C`;
+
+                const rhCell = row.insertCell();
+                rhCell.textContent = `${forecast.rh_min} - ${forecast.rh_max}%`;
+
+                const windDirCell = row.insertCell();
+                windDirCell.textContent = forecast.windir24h;
+
+                const windSpeedCell = row.insertCell();
+                windSpeedCell.textContent = `${forecast.windspd24h} Km/Jam`;
+
+                const visibilityCell = row.insertCell();
+                visibilityCell.textContent = forecast.vis24;
+
+                const rainIntensityCell = row.insertCell();
+                rainIntensityCell.textContent = `${forecast.prec24h} mm`;
+
+                const rainDurationCell = row.insertCell();
+                rainDurationCell.textContent = `${forecast.dur24h} Jam`;
+
+                // Update the alert message based on forecast data
+                const alertMessage = document.getElementById("alertMessage");
+                if (forecast.alert_daily) {
+                  alertMessage.textContent = forecast.alert_daily;
+                } else {
+                  alertMessage.textContent = "No alert for today.";
+                }
+              });
+            });
+            // Call the function to update publication date
+            updatePublicationDate();
+          })
+          .catch((error) => {
+            console.error("Error updating weather table:", error);
+            // Display error message to the user or handle the error as needed
+          });
+      }
+
+      // Initial table update and event listener
+      updateWeatherTable(locationSelect.value, locationDate); // Pass locationDate to updateWeatherTable
+      locationSelect.addEventListener("change", () => {
+        locationDate = new Date(); // Reset locationDate to today's date
+        updateWeatherTable(locationSelect.value, locationDate); // Update weather data for the new location and date
+      });
+    </script>
+  </body>
+</html>
